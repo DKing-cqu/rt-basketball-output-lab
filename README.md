@@ -13,7 +13,7 @@ python -m pip install -r requirements.txt
 python -m basketball --demo --output-dir runs/baseline
 ```
 
-`--demo` 会生成一段合成视频，用来检查安装、读取和输出。正式验收素材由课程发放。拿到视频后，用同样的程序读取它，例如：
+`--demo` 会生成一段合成视频，用来检查安装、读取和输出。正式验收统一使用[飞书培训文档中任务二的实拍视频](https://gcnhkq914dqv.feishu.cn/wiki/FRLKwEGQmiAteqkJHLUc8nU2ncd#doxcnpqrTZQIZU7CzLTJQpk3Ypg)。下载为 `samples/basketball.mp4` 后运行：
 
 ```bash
 python -m basketball --input samples/basketball.mp4 --output-dir runs/baseline
@@ -36,4 +36,4 @@ python -m basketball --input samples/basketball.mp4 --output-dir runs/baseline
 | `__main__.py` | 解析参数和串联处理流程 |
 | `demo.py` | 生成合成视频 |
 
-在自己的仓库分支完成改动。保留原有视频和 CSV，复用已有检测结果，并输出正常可见、完全遮挡和重新出现三个阶段的截图。按飞书文档的任务二要求提交分支链接、截图和复测记录。
+在自己的仓库分支完成改动。保留原有视频和 CSV，复用已有检测结果，并输出正常可见、完全出画和重新进入画面三个阶段的截图。按飞书文档的任务二要求提交分支链接、截图和复测记录。
