@@ -6,7 +6,6 @@ from pathlib import Path
 import cv2
 import numpy as np
 
-from .demo import make_demo
 from .detection import detect_ball
 from .output import write_outputs
 from .tracking import Tracker, TrackingResult
@@ -22,18 +21,16 @@ def track_video(reader: cv2.VideoCapture, fps: float) -> Iterator[tuple[np.ndarr
 
 def main() -> None:
     parser = argparse.ArgumentParser(description="Track the basketball in a video.")
-    source = parser.add_mutually_exclusive_group(required=True)
-    source.add_argument("--input", type=Path, help="Path to the input video.")
-    source.add_argument("--demo", action="store_true", help="Generate and use the synthetic smoke-test video.")
+    default_video = Path(__file__).resolve().parents[1] / "samples" / "basketball.mp4"
+    parser.add_argument(
+        "--input", type=Path, default=default_video,
+        help="Path to the input video (default: bundled samples/basketball.mp4).",
+    )
     parser.add_argument("--output-dir", type=Path, default=Path("runs/tracking"))
     args = parser.parse_args()
 
+    input_path = args.input
     try:
-        input_path = args.input
-        if args.demo:
-            input_path = Path("runs/fixtures/basketball-demo.mp4")
-            make_demo(input_path)
-
         reader = open_video(input_path)
         try:
             fps = reader.get(cv2.CAP_PROP_FPS)
